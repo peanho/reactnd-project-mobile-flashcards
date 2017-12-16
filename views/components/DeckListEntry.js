@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontFamily: 'Roboto',
+    fontSize: 24,
     textAlign: 'center',
   },
   cardSubtitle: {
@@ -21,12 +22,17 @@ const styles = StyleSheet.create({
 })
 
 const DeckListEntry = props => {
-  const { name, cardCount } = props
+  const { deck, onPress } = props
+  const { id, questions } = deck
+  const handlePress = () => onPress(id)
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+    >
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>{name}</Text>
-        <Text style={styles.cardSubtitle}>{`${cardCount} cards`}</Text>
+        <Text style={styles.cardTitle}>{id}</Text>
+        <Text style={styles.cardSubtitle}>{`${questions.length  } cards`}</Text>
       </View>
     </TouchableOpacity>
   )

@@ -3,34 +3,35 @@ import { connect } from 'react-redux'
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import { selectors as decksSelectors } from '../../decks'
 import DeckListEntry  from './DeckListEntry'
-import { COLOR_BACKGROUND } from '../../styles'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: COLOR_BACKGROUND
+    flex: 1
   }
 })
 
 class DeckListView extends React.Component {
 
-  static navigationOptions = {
-    title: 'DECKS'
-  }
-
   renderItem = ({ item }) => {
     return (
-      <DeckListEntry deck={item} />
+      <DeckListEntry deck={item} onPress={this.handlePress} />
     )
+  }
+
+  handlePress = id => {
+    const { navigate } = this.props.navigation
+    navigate('Detail', { name: id })
   }
 
   render() {
     const { decks } = this.props
+    debugger
     return (
       <View style={styles.container}>
         {decks.length
           ? <FlatList
               data={decks}
+              keyExtractor={item => item.id}
               renderItem={this.renderItem}
             />
           : <Text>Lets add a deck</Text>
