@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
 const DeckListEntry = props => {
   const { deck, onPress } = props
   const { id, questions } = deck
-  const handlePress = () => onPress(id)
+  const handlePress = id => () => onPress(id)
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={onPress}
+      onPress={handlePress(id)}
     >
       <View style={styles.card}>
         <Text style={styles.cardTitle}>{id}</Text>

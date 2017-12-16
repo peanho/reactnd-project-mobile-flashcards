@@ -25,7 +25,6 @@ class DeckListView extends React.Component {
 
   render() {
     const { decks } = this.props
-    debugger
     return (
       <View style={styles.container}>
         {decks.length

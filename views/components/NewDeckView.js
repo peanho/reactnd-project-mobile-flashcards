@@ -58,8 +58,9 @@ class NewDeckView extends React.Component {
 
   handleCreate = () => {
     const { add, navigation } = this.props
-    add(this.state.name)
-    navigation.navigate('Detail', { name: this.state.name })
+    const { name } = this.state
+    add(name)
+    navigation.navigate('Detail', { name })
   }
 
   render() {
