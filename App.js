@@ -1,23 +1,29 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { Provider } from 'react-redux'
+import { StackNavigator } from 'react-navigation'
+import { Constants } from 'expo'
+import configureStore from './app/configureStore'
+import DeckListView from './views/components/DeckListView'
+
+const RootStackNavigator = StackNavigator(
+  {
+    Home: {
+      screen: DeckListView
+    }
+  },
+  {
+    navigationOptions: { headerStyle: { paddingTop: Constants.statusBarHeight } }
+  }
+)
+
+const store = configureStore()
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
+      <Provider store={store}>
+        <RootStackNavigator />
+      </Provider>
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
