@@ -5,5 +5,5 @@ const getAllIds = state => state.decks.allIds
 
 export const getAll = createSelector(
   [getAllIds, getById],
-  (allIds, byId) => allIds.map(id => allIds[id])
+  (allIds, byId) => allIds.map(id => byId[id])
 )
