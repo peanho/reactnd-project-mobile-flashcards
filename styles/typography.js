@@ -77,6 +77,6 @@ export const caption = {
 export const button = {
   fontFamily: 'Roboto',
   fontSize: 14,
-  fontSize: "500",
+  fontWeight: "500",
   color: 'rgba(0, 0, 0, 0.87)'
 }
