@@ -26,6 +26,12 @@ class DeckView extends React.Component {
     title: navigation.state.params.name
   })
 
+  handleAddCard = () => {
+    const { navigate } = this.props.navigation
+    const { deck } = this.props
+    navigate('NewQuestion', { deckId: deck.id })
+  }
+
   render() {
     const { deck } = this.props
     return (
@@ -35,7 +41,7 @@ class DeckView extends React.Component {
           <Button
             title="Add Card"
             color="blue"
-            onPress={() => 'Nothing'}
+            onPress={this.handleAddCard}
           />
           <Button
             title="Start Quiz"
