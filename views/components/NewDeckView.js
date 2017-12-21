@@ -46,21 +46,21 @@ class NewDeckView extends React.Component {
     super(props)
 
     this.state = {
-      name: ''
+      title: ''
     }
   }
 
-  handleText = name => {
+  handleText = title => {
     this.setState({
-      name
+      title
     })
   }
 
   handleCreate = () => {
     const { add, navigation } = this.props
-    const { name } = this.state
-    add(name)
-    navigation.navigate('Detail', { name })
+    const { title } = this.state
+    add(title)
+    navigation.navigate('Detail', { title })
   }
 
   render() {
@@ -69,7 +69,7 @@ class NewDeckView extends React.Component {
         <Text>Deck Name</Text>
         <TextInput
           style={styles.input}
-          value={this.state.name}
+          value={this.state.title}
           onChangeText={this.handleText}
         />
         <TouchableNativeFeedback
@@ -87,7 +87,7 @@ class NewDeckView extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    add: name => dispatch(decksActions.add(name))
+    add: title => dispatch(decksActions.add(title))
   }
 }
 

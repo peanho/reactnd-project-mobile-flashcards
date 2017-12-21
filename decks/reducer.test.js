@@ -4,8 +4,8 @@ import * as actions from './actions'
 it('should return the initial state', () => {
   expect(reducer(undefined, {})).toEqual(
     {
-      byId: {},
-      allIds: []
+      byTitle: {},
+      allTitles: []
     }
   )
 })
@@ -15,13 +15,13 @@ it('should handle ADD', () => {
     reducer({}, actions.add('Udacity'))
   ).toEqual(
     {
-      byId: {
+      byTitle: {
         'Udacity': {
-          id: 'Udacity',
+          title: 'Udacity',
           questions: []
         }
       },
-      allIds: ['Udacity']
+      allTitles: ['Udacity']
     }
   )
 })

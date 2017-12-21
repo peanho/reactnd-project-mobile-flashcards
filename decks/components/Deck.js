@@ -7,25 +7,23 @@ import {
 import { typography } from '../../styles'
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  header: {
+  title: {
     ...typography.display2,
-    textAlign: 'center'
+    textAlign: 'center',
+    marginBottom: 4
   },
-  subheader: {
-    ...typography.subheading,
+  cardCount: {
+    ...typography.headline,
     textAlign: 'center'
   }
 })
 
 const Deck = props => {
-  const { name, questionsCount, style } = props
+  const { title, cardCount, style = {} } = props
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>{name}</Text>
-      <Text style={styles.subheader}>{`${questionsCount} cards`}</Text>
+    <View style={style}>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.cardCount}>{`${cardCount} cards`}</Text>
       {props.children}
     </View>
   )

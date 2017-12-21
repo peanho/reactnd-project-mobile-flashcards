@@ -1,15 +1,15 @@
 import { createSelector } from 'reselect'
 
-const getById = state => state.decks.byId
-const getAllIds = state => state.decks.allIds
-const getId = (_, name) => name
+const getByTitle = state => state.decks.byTitle
+const getAllTitles = state => state.decks.allTitles
+const getTitleFilter = (_, title) => title
 
 export const getAll = createSelector(
-  [getAllIds, getById],
-  (allIds, byId) => allIds.map(id => byId[id])
+  [getAllTitles, getByTitle],
+  (allTitles, byTitle) => allTitles.map(title => byTitle[title])
 )
 
 export const getOne = createSelector(
-  [getById, getId],
-  (byId, id) => byId[id]
+  [getByTitle, getTitleFilter],
+  (byTitle, title) => byTitle[title]
 )

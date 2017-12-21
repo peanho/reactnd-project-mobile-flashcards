@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation'
 import MainTabNavigator from './MainTabNavigator'
 import DeckView from '../components/DeckView'
 import NewQuestionView from '../components/NewQuestionView'
+import QuizView from '../components/QuizView'
 
 const RootStackNavigator = StackNavigator({
   Main: {
@@ -14,6 +15,9 @@ const RootStackNavigator = StackNavigator({
   },
   NewQuestion: {
     screen: NewQuestionView
+  },
+  Quiz: {
+    screen: QuizView
   }
 })
 

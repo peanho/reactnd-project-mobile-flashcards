@@ -1,25 +1,31 @@
 import { combineReducers } from 'redux'
 import { ADD } from './actions'
-import cardsReducer, { actions as cardActions } from '../cards'
+import { actions as cardActions } from '../cards'
 
-export const decksById = (state = {}, action) => {
+const addCard = (state, action) => {
+  const { title, card } = action
+  const deck = state[title]
+  return {
+    ...state,
+    [title]: {
+      ...deck,
+      questions: deck.questions.concat(action.card)
+    }
+  }
+}
+
+export const decksByTitle = (state = {}, action) => {
   switch (action.type) {
     case ADD:
       return {
         ...state,
-        [action.id]: {
-          id: action.id,
+        [action.title]: {
+          title: action.title,
           questions: []
         }
       }
     case cardActions.ADD:
-      return {
-        ...state,
-        [action.deckId]: {
-          id: action.deckId,
-          questions: cardsReducer(state[action.deckId].questions, action)
-        }
-      }
+      return addCard(state, action)
     default:
       return state
   }
@@ -28,13 +34,13 @@ export const decksById = (state = {}, action) => {
 export const allDecks = (state = [], action) => {
   switch (action.type) {
     case ADD:
-      return [...state, action.id]
+      return [...state, action.title]
     default:
       return state
   }
 }
 
 export default combineReducers({
-  byId: decksById,
-  allIds: allDecks
+  byTitle: decksByTitle,
+  allTitles: allDecks
 })
