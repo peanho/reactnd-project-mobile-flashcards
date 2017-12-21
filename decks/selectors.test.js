@@ -19,7 +19,7 @@ describe('selector recomputes', () => {
     expect(getAll(state)).toEqual(
       [
         {
-          id: 'Udacity',
+          title: 'Udacity',
           questions: []
         }
       ]

@@ -1,7 +1,7 @@
 export const ADD = 'flashcards/cards/ADD'
 
-export const add = (deckId, card) => ({
+export const add = (title, card) => ({
   type: ADD,
-  deckId,
+  title,
   card
 })

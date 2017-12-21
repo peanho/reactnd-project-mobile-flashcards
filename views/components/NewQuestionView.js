@@ -109,10 +109,10 @@ class NewQuestionView extends React.Component {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { deckId } = ownProps.navigation.state.params
+  const { title } = ownProps.navigation.state.params
   return {
     ...ownProps,
-    addCard: (card) => dispatchProps.add(deckId, card)
+    addCard: (card) => dispatchProps.add(title, card)
   }
 }
 

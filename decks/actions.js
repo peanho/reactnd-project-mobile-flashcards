@@ -1,6 +1,6 @@
 export const ADD = 'flashcards/decks/ADD'
 
-export const add = id => ({
+export const add = title => ({
   type: ADD,
-  id
+  title
 })

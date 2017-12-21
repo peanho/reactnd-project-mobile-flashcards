@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import Deck from '../../decks/components/Deck'
 import { getOne } from '../../decks/selectors'
+import { typography } from '../../styles'
 
 const styles = StyleSheet.create({
   container: {
@@ -18,35 +19,47 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around'
+  },
+  addCard: {
+    padding: 2,
+    minWidth: 8,
+    backgroundColor: 'blue',
+    ...typography.button
   }
 })
 
 class DeckView extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.name
+    title: navigation.state.params.title
   })
 
   handleAddCard = () => {
     const { navigate } = this.props.navigation
     const { deck } = this.props
-    navigate('NewQuestion', { deckId: deck.id })
+    navigate('NewQuestion', { title: deck.title })
+  }
+
+  handleStartQuiz = () => {
+    const { navigate } = this.props.navigation
+    const { deck } = this.props
+    navigate('Quiz', { title: deck.title })
   }
 
   render() {
     const { deck } = this.props
     return (
       <View style={styles.container}>
-        <Deck name={deck.id} questionsCount={deck.questions.length} />
+        <Deck title={deck.title} cardCount={deck.questions.length} />
         <View style={styles.actions}>
           <Button
             title="Add Card"
-            color="blue"
             onPress={this.handleAddCard}
+            style={styles.addCard}
           />
           <Button
             title="Start Quiz"
             color="black"
-            onPress={() => 'Nothing'}
+            onPress={this.handleStartQuiz}
           />
         </View>
       </View>
@@ -55,9 +68,9 @@ class DeckView extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { name } = ownProps.navigation.state.params
+  const { title } = ownProps.navigation.state.params
   return {
-    deck: getOne(state, name)
+    deck: getOne(state, title)
   }
 }
 
