@@ -1,10 +1,10 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import configureStore from './app/configureStore'
-import { View, StyleSheet } from 'react-native'
-import { RootNavigator } from './views'
 import { AppLoading } from 'expo'
-import { actions as decksActions} from './decks'
+import { View, StyleSheet } from 'react-native'
+import configureStore from './app/configureStore'
+import { RootNavigator } from './app/views'
+import { actions as decksActions} from './app/decks'
 import { setLocalNotification } from './app/notifications'
 
 const styles = StyleSheet.create({

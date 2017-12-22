@@ -8,7 +8,7 @@ import {
 import { selectors as decksSelectors } from '../../decks'
 import Card from '../../cards/components/Card'
 import SummaryCard from '../../cards/components/SummaryCard'
-import { clearLocalNotification, setLocalNotification } from '../../app/notifications'
+import { clearLocalNotification, setLocalNotification } from '../../notifications'
 
 const initialState = {
   currentCardIndex: 0,
