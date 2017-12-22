@@ -59,8 +59,15 @@ class NewDeckView extends React.Component {
   handleCreate = () => {
     const { add, navigation } = this.props
     const { title } = this.state
-    add(title)
-    navigation.navigate('Detail', { title })
+    this.setState((prevState, props) => {
+      add(title).then(action => {
+        const { title } = action
+        navigation.navigate('Detail', { title })
+      })
+      return {
+        title: ''
+      }
+    })
   }
 
   render() {
@@ -87,7 +94,7 @@ class NewDeckView extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    add: title => dispatch(decksActions.add(title))
+    add: title => dispatch(decksActions.create(title))
   }
 }
 

@@ -56,6 +56,8 @@ class DeckView extends React.Component {
             onPress={this.handleAddCard}
             style={styles.addCard}
           />
+        </View>
+        <View>
           <Button
             title="Start Quiz"
             color="black"
@@ -69,8 +71,9 @@ class DeckView extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { title } = ownProps.navigation.state.params
+  const deck = getOne(state, title)
   return {
-    deck: getOne(state, title)
+    deck
   }
 }
 
