@@ -1,6 +1,10 @@
-import { createStore } from "redux"
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 import rootReducer from './reducer'
+import * as api from './api'
 
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+/* 
 const preloadedState = {
   decks: {
     byTitle: {
@@ -30,10 +34,10 @@ const preloadedState = {
     allTitles: ['Udacity', 'JavaScript']
   }
 }
-
+ */
 const configureStore = () => createStore(
   rootReducer,
-  preloadedState
+  applyMiddleware(thunkMiddleware.withExtraArgument(api))
 )
 
 export default configureStore

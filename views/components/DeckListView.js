@@ -31,8 +31,9 @@ class DeckListView extends React.Component {
 }
 
 const mapStateToProps = state => {
+  const decks = decksSelectors.getAll(state)
   return {
-    decks: decksSelectors.getAll(state)
+    decks
   }
 }
 

@@ -112,7 +112,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { title } = ownProps.navigation.state.params
   return {
     ...ownProps,
-    addCard: (card) => dispatchProps.add(title, card)
+    addCard: (card) => dispatchProps.create(title, card)
   }
 }
 

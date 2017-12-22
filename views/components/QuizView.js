@@ -6,8 +6,9 @@ import {
   StyleSheet
 } from 'react-native'
 import { selectors as decksSelectors } from '../../decks'
-import Card from '../../cards/components/Card';
-import SummaryCard from '../../cards/components/SummaryCard';
+import Card from '../../cards/components/Card'
+import SummaryCard from '../../cards/components/SummaryCard'
+import { clearLocalNotification, setLocalNotification } from '../../app/notifications'
 
 const initialState = {
   currentCardIndex: 0,
@@ -37,6 +38,10 @@ class QuizView extends React.Component {
     this.setState((prevState, props) => {
       const nexCardIndex = prevState.currentCardIndex + 1
       const complete = nexCardIndex === props.deck.questions.length
+      if (complete) {
+        clearLocalNotification()
+          .then(setLocalNotification)
+      }
       return {
         score: prevState.score + 1,
         currentCardIndex: nexCardIndex,
@@ -49,6 +54,10 @@ class QuizView extends React.Component {
     this.setState((prevState, props) => {
       const nexCardIndex = prevState.currentCardIndex + 1
       const complete = nexCardIndex === props.deck.questions.length
+      if (complete) {
+        clearLocalNotification()
+          .then(setLocalNotification)
+      }
       return {
         currentCardIndex: nexCardIndex,
         complete
