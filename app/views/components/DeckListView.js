@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import { selectors as decksSelectors } from '../../decks'
-import DeckList from '../../decks/components/DeckList';
+import DeckList from '../../decks/components/DeckList'
 
 const styles = StyleSheet.create({
   container: {
@@ -14,7 +14,7 @@ class DeckListView extends React.Component {
 
   handlePress = title => {
     const { navigate } = this.props.navigation
-    navigate('Detail', { title })
+    navigate('Deck', { title })
   }
 
   render() {

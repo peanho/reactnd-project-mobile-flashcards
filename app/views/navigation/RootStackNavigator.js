@@ -5,12 +5,13 @@ import MainTabNavigator from './MainTabNavigator'
 import DeckView from '../components/DeckView'
 import NewQuestionView from '../components/NewQuestionView'
 import QuizView from '../components/QuizView'
+import { COLOR_PRIMARY } from '../../styles/colors'
 
 const RootStackNavigator = StackNavigator({
   Main: {
     screen: MainTabNavigator
   },
-  Detail: {
+  Deck: {
     screen: DeckView
   },
   NewQuestion: {
@@ -19,6 +20,13 @@ const RootStackNavigator = StackNavigator({
   Quiz: {
     screen: QuizView
   }
+}, {
+    navigationOptions: {
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: COLOR_PRIMARY
+      }
+    }
 })
 
 export default RootStackNavigator

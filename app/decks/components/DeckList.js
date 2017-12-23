@@ -11,11 +11,10 @@ import DeckListEntry from './DeckListEntry';
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 20,
-    backgroundColor: 'white'
+    paddingVertical: 10
   },
   deck: {
-    paddingVertical: 20
+    paddingVertical: 10
   }
 })
 

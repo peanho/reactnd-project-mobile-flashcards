@@ -2,10 +2,10 @@ import React from 'react'
 import {
   View,
   Text,
-  StyleSheet,
-  Button
+  StyleSheet
 } from 'react-native'
-import { typography } from '../../styles'
+import { Button } from 'react-native-elements'
+import { typography, colors } from '../../styles'
 
 const styles = StyleSheet.create({
   question: {
@@ -27,6 +27,12 @@ class Question extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props !== nextProps) {
+      this.setState({ show: false })
+    }
+  }
+
   toggleShow = () => {
     this.setState((prevState) => ({
       show: !prevState.show
@@ -44,6 +50,8 @@ class Question extends React.Component {
           : <Button
               title="Show answer"
               onPress={this.toggleShow}
+              color={colors.COLOR_PRIMARY}
+              backgroundColor="transparent"
             />
         }
       </View>

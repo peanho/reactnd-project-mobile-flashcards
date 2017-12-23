@@ -1,30 +1,36 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 import { 
   View,
-  Button,
-  StyleSheet
+  StyleSheet,
+  TouchableNativeFeedback
 } from 'react-native'
+import { Button } from 'react-native-elements'
 import Deck from '../../decks/components/Deck'
 import { getOne } from '../../decks/selectors'
-import { typography } from '../../styles'
+import { typography, colors } from '../../styles'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  deck: {
+    flex: 2,
     justifyContent: 'center'
   },
   actions: {
     flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around'
   },
   addCard: {
-    padding: 2,
-    minWidth: 8,
-    backgroundColor: 'blue',
-    ...typography.button
+    backgroundColor: colors.COLOR_SECONDARY,
+  },
+  startQuiz: {
+    backgroundColor: colors.COLOR_PRIMARY
   }
 })
 
@@ -49,19 +55,25 @@ class DeckView extends React.Component {
     const { deck } = this.props
     return (
       <View style={styles.container}>
-        <Deck title={deck.title} cardCount={deck.questions.length} />
+        <Deck 
+          title={deck.title} 
+          cardCount={deck.questions.length}
+          style={styles.deck}
+        />
         <View style={styles.actions}>
           <Button
+            large
+            raised
+            title="Start Quiz"
+            backgroundColor={colors.COLOR_SECONDARY}
+            onPress={this.handleStartQuiz}
+          />
+          <Button
+            large
+            raised
             title="Add Card"
             onPress={this.handleAddCard}
-            style={styles.addCard}
-          />
-        </View>
-        <View>
-          <Button
-            title="Start Quiz"
-            color="black"
-            onPress={this.handleStartQuiz}
+            backgroundColor={colors.BLACK}
           />
         </View>
       </View>

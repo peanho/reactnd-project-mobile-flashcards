@@ -1,48 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { 
+  View,
+  Text,
   StyleSheet,
-  Button,
-  KeyboardAvoidingView,
-  TextInput
+  KeyboardAvoidingView
 } from 'react-native'
+import { FormLabel, FormInput, Button } from 'react-native-elements'
 import { actions as cardActions } from '../../cards'
-import { typography } from '../../styles'
+import { typography, colors } from '../../styles'
+import { display2 } from '../../styles/typography';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    margin: 8
   },
-  question: {
-    ...typography.body1,
-    width: 200,
-    height: 44,
-    padding: 8,
-    borderWidth: 1,
-    borderColor: '#757575',
-    margin: 50
-  },
-  answer: {
-    ...typography.body1,
-    width: 200,
-    height: 44,
-    padding: 8,
-    borderWidth: 1,
-    borderColor: '#757575',
-    margin: 50
-  },
-  btnSubmit: {
-    ...typography.button,
-    backgroundColor: 'red',
-    width: 200,
-    padding: 10,
-    paddingLeft: 50,
-    paddingRight: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5
+  card: {
+    margin: 8
   }
 })
 
@@ -58,7 +33,8 @@ class NewQuestionView extends React.Component {
 
     this.state = {
       question: '',
-      answer: ''
+      answer: '',
+      submitting: false
     }
   }
 
@@ -77,31 +53,42 @@ class NewQuestionView extends React.Component {
   handleAdd = () => {
     const { addCard } = this.props
     const card = this.state
-    addCard(card)
     this.setState({
       question: '',
-      answer: ''
+      answer: '',
+      submitting: true
     })
+    addCard(card).then(() => this.setState({
+      submitting: false
+    }))
+    
   }
 
   render() {
-
+    const { question, answer, submitting } = this.state
+    const disabled = submitting || !question.length || !answer.length
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
-        <TextInput
-          style={styles.question}
-          value={this.state.question}
-          onChangeText={this.handleChangeQuestion}
-        />
-        <TextInput
-          style={styles.answer}
-          value={this.state.answer}
-          onChangeText={this.handleChangeAnswer}
-        />
-        <Button 
+        {submitting && <Text>Submitting...</Text>}
+        <View style={styles.card}>
+          <FormLabel>Question</FormLabel>
+          <FormInput
+            value={this.state.question}
+            onChangeText={this.handleChangeQuestion}
+          />
+          <FormLabel>Answer</FormLabel>
+          <FormInput
+            value={this.state.answer}
+            onChangeText={this.handleChangeAnswer}
+          />
+        </View>
+        <Button
+          large
+          raised
           title="Submit"
-          color="black"
+          backgroundColor={colors.COLOR_SECONDARY}
           onPress={this.handleAdd}
+          disabled={disabled}
         />
       </KeyboardAvoidingView>
     )

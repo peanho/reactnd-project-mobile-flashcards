@@ -1,15 +1,18 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import configureStore from './app/configureStore'
-import { View, StyleSheet } from 'react-native'
-import { RootNavigator } from './views'
 import { AppLoading } from 'expo'
-import { actions as decksActions} from './decks'
+import { View, StyleSheet } from 'react-native'
+import configureStore from './app/configureStore'
+import { RootNavigator } from './app/views'
+import { actions as decksActions} from './app/decks'
 import { setLocalNotification } from './app/notifications'
+import AppStatusBar from './app/components/AppStatusBar'
+import { colors } from './app/styles'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: colors.WHITE
   }
 })
 
@@ -46,6 +49,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
+          <AppStatusBar backgroundColor={colors.COLOR_PRIMARY_DARK} barStyle="light-content" />
           <RootNavigator />
         </View>
       </Provider>

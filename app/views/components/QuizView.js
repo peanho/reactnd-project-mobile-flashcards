@@ -2,13 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { 
   View,
-  Text,
   StyleSheet
 } from 'react-native'
+import { NavigationActions } from 'react-navigation'
 import { selectors as decksSelectors } from '../../decks'
 import Card from '../../cards/components/Card'
 import SummaryCard from '../../cards/components/SummaryCard'
-import { clearLocalNotification, setLocalNotification } from '../../app/notifications'
+import { clearLocalNotification, setLocalNotification } from '../../notifications'
 
 const initialState = {
   currentCardIndex: 0,
@@ -39,8 +39,7 @@ class QuizView extends React.Component {
       const nexCardIndex = prevState.currentCardIndex + 1
       const complete = nexCardIndex === props.deck.questions.length
       if (complete) {
-        clearLocalNotification()
-          .then(setLocalNotification)
+        this.handleNotification()
       }
       return {
         score: prevState.score + 1,
@@ -55,8 +54,7 @@ class QuizView extends React.Component {
       const nexCardIndex = prevState.currentCardIndex + 1
       const complete = nexCardIndex === props.deck.questions.length
       if (complete) {
-        clearLocalNotification()
-          .then(setLocalNotification)
+        this.handleNotification()
       }
       return {
         currentCardIndex: nexCardIndex,
@@ -65,20 +63,35 @@ class QuizView extends React.Component {
     })
   }
 
+  handleNotification = () => {
+    clearLocalNotification()
+      .then(setLocalNotification)
+  }
+
   handleBackToDeck = () => {
     const { deck, navigation } = this.props
     const { title } = deck
-    navigation.navigate('Detail', { title })
+    const navigateToDeck = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: 'Main',
+          action: NavigationActions.navigate({ routeName: 'DeckListView' })
+        }),
+        NavigationActions.navigate({ routeName: 'Deck', params: { title } })
+      ]
+    })
+    navigation.dispatch(navigateToDeck)
   }
 
   handleRestart = () => {
-    this.setState((prevState, props) => initialState)
+    this.setState(initialState)
   }
 
   render() {
-    const { questions } = this.props.deck
+    const { deck } = this.props
+    const { title, questions } = deck
     const { currentCardIndex, score, complete } = this.state
-    const progress = `${currentCardIndex} / ${questions.length}`
     return (
       <View style={styles.container}>
         {complete
@@ -89,7 +102,7 @@ class QuizView extends React.Component {
             />
           : <Card
               card={questions[currentCardIndex]}
-              progressHeader={progress}
+              progressHeader={`${currentCardIndex + 1} / ${questions.length}`}
               onMarkCorrect={this.handleMarkCorrect}
               onMarkIncorrect={this.handleMarkIncorrect}
             />
