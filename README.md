@@ -4,15 +4,17 @@ This is the final assessment project for Udacity's React Native course.
 ## How to execute
 In order to execute the app on and Android device with Expo installed, download or clone it to a directory on your local machine then run:
 ```
-npm run install
-npm run start
+yarn install
+yarn start
 ```
 
 To run it on an Android emulator execute instead:
 ```
-npm run install
-npm run android
+yarn install
+yarn android
 ```
+
+You can use npm instead.
 
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
