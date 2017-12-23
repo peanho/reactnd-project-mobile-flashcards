@@ -14,7 +14,7 @@ class DeckListView extends React.Component {
 
   handlePress = title => {
     const { navigate } = this.props.navigation
-    navigate('Detail', { title })
+    navigate('Deck', { title })
   }
 
   render() {

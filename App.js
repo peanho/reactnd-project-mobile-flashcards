@@ -6,10 +6,13 @@ import configureStore from './app/configureStore'
 import { RootNavigator } from './app/views'
 import { actions as decksActions} from './app/decks'
 import { setLocalNotification } from './app/notifications'
+import AppStatusBar from './app/components/AppStatusBar'
+import { COLOR_PRIMARY_DARK } from './app/styles/colors'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#ffffff'
   }
 })
 
@@ -46,6 +49,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
+          <AppStatusBar backgroundColor={COLOR_PRIMARY_DARK} barStyle="light-content" />
           <RootNavigator />
         </View>
       </Provider>

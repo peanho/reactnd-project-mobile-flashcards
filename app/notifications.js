@@ -11,7 +11,7 @@ export const clearLocalNotification = () => {
 const createNotification = () => {
   return {
     title: 'Time to study!',
-    body: 'You will keep up with just some minutes a day',
+    body: 'With just some minutes per day you will go far',
     android: {
       sound: true,
       priority: 'high',
@@ -21,6 +21,7 @@ const createNotification = () => {
   }
 }
 
+// method adapted from the local notifications lesson on the course
 export const setLocalNotification = () => {
   return AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(data => {
@@ -34,10 +35,10 @@ export const setLocalNotification = () => {
               Notifications.cancelAllScheduledNotificationsAsync()
 
               let tomorrow = new Date()
-              tomorrow.setDate(tomorrow.getDate())
+              tomorrow.setDate(tomorrow.getDate() + 1)
               tomorrow.setHours(tomorrow.getHours())
               tomorrow.setMinutes(tomorrow.getMinutes())
-              tomorrow.setSeconds(tomorrow.getSeconds() + 40)
+              tomorrow.setSeconds(tomorrow.getSeconds())
 
               Notifications.scheduleLocalNotificationAsync(
                 createNotification(),

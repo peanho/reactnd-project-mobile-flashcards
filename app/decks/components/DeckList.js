@@ -11,8 +11,7 @@ import DeckListEntry from './DeckListEntry';
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 20,
-    backgroundColor: 'white'
+    paddingVertical: 20
   },
   deck: {
     paddingVertical: 20

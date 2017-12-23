@@ -2,23 +2,29 @@ import React from 'react'
 import {
   View,
   Text,
-  StyleSheet,
-  Button
+  StyleSheet
 } from 'react-native'
-import { typography } from '../../styles'
+import { Button } from 'react-native-elements'
+import { typography, colors } from '../../styles'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center'
   },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 4
+  },
   score: {
-    flex: 5,
-    ...typography.display2
+    ...typography.display2,
+    textAlign: 'center'
   },
   actions: {
-    flex: 2,
+    flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around'
   }
@@ -29,15 +35,23 @@ const SummaryCard = props => {
   const message = `Your score is: ${score}`
   return (
     <View style={styles.container}>
-      <Text style={styles.score}>{message}</Text>
+      <View style={styles.content}>
+        <Text style={styles.score}>{message}</Text>
+      </View>
       <View style={styles.actions}>
         <Button
-          title="Restart Quiz"
-          onPress={onRestart}
+          large
+          raised
+          title="Back to Deck"
+          backgroundColor={colors.COLOR_PRIMARY}
+          onPress={onBack}
         />
         <Button
-          title="Back to Deck"
-          onPress={onBack}
+          large
+          raised
+          title="Restart Quiz"
+          backgroundColor={colors.BLACK}
+          onPress={onRestart}
         />
       </View>
     </View>

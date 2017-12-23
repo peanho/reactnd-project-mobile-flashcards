@@ -1,53 +1,35 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { actions as decksActions } from '../../decks'
 import {
   View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  TouchableNativeFeedback,
   KeyboardAvoidingView,
   StyleSheet
 } from 'react-native'
+import { FormLabel, FormInput, Button } from 'react-native-elements'
+import { actions as decksActions } from '../../decks'
+import { typography, colors } from '../../styles'
+import { NavigationActions } from 'react-navigation'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  form: {
+    alignItems: 'flex-start',
+    margin: 8
   },
   btn: {
-    backgroundColor: 'red',
-    width: 200,
-    padding: 10,
-    paddingLeft: 50,
-    paddingRight: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5
-  },
-  btnText: {
-    color: 'white'
-  },
-  input: {
-    width: 200,
-    height: 44,
-    padding: 8,
-    borderWidth: 1,
-    borderColor: '#757575',
-    margin: 50
+    alignSelf: 'flex-end',
+    backgroundColor: colors.COLOR_PRIMARY
   }
 })
 
 class NewDeckView extends React.Component {
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      title: ''
-    }
+  state = {
+    title: ''
   }
 
   handleText = title => {
@@ -59,34 +41,46 @@ class NewDeckView extends React.Component {
   handleCreate = () => {
     const { add, navigation } = this.props
     const { title } = this.state
-    this.setState((prevState, props) => {
-      add(title).then(action => {
-        const { title } = action
-        navigation.navigate('Detail', { title })
+    this.setState({ title: '' })
+    add(title).then(action => {
+      const { title } = action
+      const navigateToDeck = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'Main',
+            action: NavigationActions.navigate({ routeName: 'DeckListView' })
+          }),
+          NavigationActions.navigate({ routeName: 'Deck', params: { title } })
+        ]
       })
-      return {
-        title: ''
-      }
+      navigation.dispatch(navigateToDeck)
     })
   }
 
   render() {
+    const disabled = !this.state.title.length
+    const buttonStyles = [styles.btn]
+    const textStyles = [styles.btnText]
+    if (disabled) {
+      buttonStyles.push(styles.btnDisabled)
+      textStyles.push(styles.btnTextDisabled)
+    }
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
-        <Text>Deck Name</Text>
-        <TextInput
-          style={styles.input}
-          value={this.state.title}
-          onChangeText={this.handleText}
-        />
-        <TouchableNativeFeedback
-          background={TouchableNativeFeedback.SelectableBackground()}
-          onPress={this.handleCreate}
-        >
-          <View style={styles.btn}>
-            <Text style={styles.btnText}>ADD DECK</Text>
-          </View>
-        </TouchableNativeFeedback> 
+        <View style={styles.form}>
+          <FormLabel>Name</FormLabel>
+          <FormInput
+            value={this.state.value}
+            onChangeText={this.handleText}
+          />
+        </View>
+          <Button
+            raised
+            title="ADD DECK"
+            buttonStyle={styles.btn}
+            onPress={this.handleCreate}
+          />
       </KeyboardAvoidingView>
     )
   }

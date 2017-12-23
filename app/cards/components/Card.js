@@ -2,19 +2,16 @@ import React from 'react'
 import {
   View,
   Text,
-  Button,
   StyleSheet
 } from 'react-native'
-import { typography } from '../../styles'
+import { Button } from 'react-native-elements'
+import { typography, colors } from '../../styles'
 import Question from './Question'
 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    backgroundColor: 'white'
+    flex: 1
   },
   progressHeader: {
     textAlign: 'left',
@@ -28,17 +25,15 @@ const styles = StyleSheet.create({
   },
   actions: {
     flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    margin: 4
   },
-  btnCorrect: {
-    backgroundColor: 'green',
-    width: 100
-  },
-  btnIncorrect: {
-    backgroundColor: 'red',
-    width: 100
+  btn: {
+    minWidth: 100
   }
+
 })
 
 class Card extends React.Component {
@@ -55,8 +50,22 @@ class Card extends React.Component {
         <Text style={styles.progressHeader}>{progressHeader}</Text>
         <Question question={question} answer={answer} style={styles.content} />
         <View style={styles.actions}>
-          <Button title="Correct" onPress={onMarkCorrect} color="green" style={styles.btnCorrect} />
-          <Button title="Incorrect" onPress={onMarkIncorrect} color="red" style={styles.btnIncorrect} />
+          <Button
+            raised
+            large
+            title="Correct" 
+            onPress={onMarkCorrect}
+            backgroundColor={colors.GREEN_900}
+            buttonStyle={styles.btn}
+          />
+          <Button
+            raised
+            large
+            title="Incorrect"
+            onPress={onMarkIncorrect}
+            backgroundColor={colors.RED_500}
+            buttonStyle={styles.btn}
+          />
         </View>
       </View>
     )
