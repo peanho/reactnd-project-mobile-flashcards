@@ -2,7 +2,7 @@
 This is the final assessment project for Udacity's React Native course.
 
 ## How to execute
-In order to execute the app on and Android device with Expo installed, download or clone it to a directory on your local machine then run:
+In order to execute the app on an Android device with Expo installed, download or clone it to a directory on your local machine then run:
 ```
 yarn install
 yarn start
