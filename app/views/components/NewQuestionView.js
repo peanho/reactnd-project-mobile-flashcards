@@ -2,12 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { 
   View,
+  Text,
   StyleSheet,
   KeyboardAvoidingView
 } from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
 import { actions as cardActions } from '../../cards'
 import { typography, colors } from '../../styles'
+import { display2 } from '../../styles/typography';
 
 const styles = StyleSheet.create({
   container: {
@@ -31,7 +33,8 @@ class NewQuestionView extends React.Component {
 
     this.state = {
       question: '',
-      answer: ''
+      answer: '',
+      submitting: false
     }
   }
 
@@ -50,17 +53,23 @@ class NewQuestionView extends React.Component {
   handleAdd = () => {
     const { addCard } = this.props
     const card = this.state
-    addCard(card)
     this.setState({
       question: '',
-      answer: ''
+      answer: '',
+      submitting: true
     })
+    addCard(card).then(() => this.setState({
+      submitting: false
+    }))
+    
   }
 
   render() {
-
+    const { question, answer, submitting } = this.state
+    const disabled = submitting || !question.length || !answer.length
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
+        {submitting && <Text>Submitting...</Text>}
         <View style={styles.card}>
           <FormLabel>Question</FormLabel>
           <FormInput
@@ -79,6 +88,7 @@ class NewQuestionView extends React.Component {
           title="Submit"
           backgroundColor={colors.COLOR_SECONDARY}
           onPress={this.handleAdd}
+          disabled={disabled}
         />
       </KeyboardAvoidingView>
     )

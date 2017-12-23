@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet
 } from 'react-native'
+import { NavigationActions } from 'react-navigation'
 import { selectors as decksSelectors } from '../../decks'
 import Card from '../../cards/components/Card'
 import SummaryCard from '../../cards/components/SummaryCard'
@@ -70,7 +71,17 @@ class QuizView extends React.Component {
   handleBackToDeck = () => {
     const { deck, navigation } = this.props
     const { title } = deck
-    navigation.navigate('Detail', { title })
+    const navigateToDeck = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: 'Main',
+          action: NavigationActions.navigate({ routeName: 'DeckListView' })
+        }),
+        NavigationActions.navigate({ routeName: 'Deck', params: { title } })
+      ]
+    })
+    navigation.dispatch(navigateToDeck)
   }
 
   handleRestart = () => {
@@ -91,7 +102,7 @@ class QuizView extends React.Component {
             />
           : <Card
               card={questions[currentCardIndex]}
-              progressHeader={`${currentCardIndex} / ${questions.length}`}
+              progressHeader={`${currentCardIndex + 1} / ${questions.length}`}
               onMarkCorrect={this.handleMarkCorrect}
               onMarkIncorrect={this.handleMarkIncorrect}
             />

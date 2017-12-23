@@ -13,16 +13,9 @@ import { NavigationActions } from 'react-navigation'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   form: {
-    alignItems: 'flex-start',
     margin: 8
-  },
-  btn: {
-    alignSelf: 'flex-end',
-    backgroundColor: colors.COLOR_PRIMARY
   }
 })
 
@@ -75,12 +68,13 @@ class NewDeckView extends React.Component {
             onChangeText={this.handleText}
           />
         </View>
-          <Button
-            raised
-            title="ADD DECK"
-            buttonStyle={styles.btn}
-            onPress={this.handleCreate}
-          />
+        <Button
+          large
+          raised
+          title="ADD DECK"
+          backgroundColor={colors.COLOR_SECONDARY}
+          onPress={this.handleCreate}
+        />
       </KeyboardAvoidingView>
     )
   }

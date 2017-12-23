@@ -9,8 +9,9 @@ import { typography } from '../../styles'
 const styles = StyleSheet.create({
   title: {
     ...typography.display2,
+    height: 60,
     textAlign: 'center',
-    marginBottom: 4
+    paddingVertical: 4
   },
   cardCount: {
     ...typography.headline,

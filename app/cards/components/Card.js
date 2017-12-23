@@ -24,16 +24,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   actions: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flex: 2,
     justifyContent: 'space-around',
     margin: 4
-  },
-  btn: {
-    minWidth: 100
   }
-
 })
 
 class Card extends React.Component {
@@ -56,7 +50,6 @@ class Card extends React.Component {
             title="Correct" 
             onPress={onMarkCorrect}
             backgroundColor={colors.GREEN_900}
-            buttonStyle={styles.btn}
           />
           <Button
             raised
@@ -64,7 +57,6 @@ class Card extends React.Component {
             title="Incorrect"
             onPress={onMarkIncorrect}
             backgroundColor={colors.RED_500}
-            buttonStyle={styles.btn}
           />
         </View>
       </View>

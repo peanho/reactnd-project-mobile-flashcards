@@ -24,19 +24,17 @@ const styles = StyleSheet.create({
   },
   actions: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-around'
   }
 })
 
 const SummaryCard = props => {
   const { score, onRestart, onBack } = props
-  const message = `Your score is: ${score}`
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.score}>{message}</Text>
+        <Text style={styles.score}>Your score:</Text>
+        <Text style={styles.score}>{score}</Text>
       </View>
       <View style={styles.actions}>
         <Button
