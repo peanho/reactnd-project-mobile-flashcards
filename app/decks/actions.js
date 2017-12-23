@@ -44,7 +44,10 @@ export const loadAll = () => (dispatch, getState, api) => {
   dispatch(loadAllRequest())
   return api.getDecks()
     .then(decks => {
-      dispatch(loadAllSuccess(decks))
+      if (decks) {
+        return dispatch(loadAllSuccess(decks))
+      }
+      return Promise.resolve()
     })
 }
 
