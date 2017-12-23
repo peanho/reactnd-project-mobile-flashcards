@@ -1,3 +1,20 @@
+# Mobile Flashcards
+This is the final assessment project for Udacity's React Native course.
+
+## How to execute
+In order to execute the app on and Android device with Expo installed, download or clone it to a directory on your local machine then run:
+```
+npm run install
+npm run start
+```
+
+To run it on an Android emulator execute instead:
+```
+npm run install
+npm run android
+```
+
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
